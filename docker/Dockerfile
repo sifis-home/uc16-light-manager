@@ -6,6 +6,9 @@ RUN pip install --no-cache-dir -r /requirements.txt
 
 ADD main.py /
 
-ENTRYPOINT ["/usr/local/bin/python3", "/main.py"]
+ADD run_manager.sh /
+ADD launch_light_manager.sh /
+
+ENTRYPOINT ["/run_manager.sh"]
 
 

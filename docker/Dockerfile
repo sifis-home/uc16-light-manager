@@ -9,6 +9,6 @@ ADD main.py /
 ADD run_manager.sh /
 ADD launch_light_manager.sh /
 
-ENTRYPOINT ["/run_manager.sh"]
+ENTRYPOINT ["/bin/bash", "/run_manager.sh"]
 
 

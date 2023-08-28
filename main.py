@@ -60,11 +60,19 @@ def on_message(ws, message):
     json_message = json.loads(message)
     if "Persistent" in json_message:
         json_message = json_message["Persistent"]
-        if json_message["topic_name"] == "domo_bistable_button":
+        if json_message["topic_name"] in ["domo_bistable_button", "domo_pir_sensor"]:
             print("BISTABLE BUTTON CHANGED STATE")
             area_name = json_message["value"]["area_name"]
             (lights, are_lights_on) = get_lights_of_room(area_name)
-            print("TURN LIGHTS" + str(not are_lights_on))
+            show_string = "off"
+
+            if are_lights_on == False:
+                show_string = "on"
+
+            if are_lights_on == True:
+                show_string = "off"
+
+            print("TURN LIGHTS " + show_string)
             for light in lights:
                 turn(ws, "domo_light", light, not are_lights_on)
 
